@@ -57,7 +57,7 @@ async function AddUser(event) {
     return false;
   }
   let user = await createUser(name, email, password);
-  await postData('auth/signup/', user);
+  await postSignup('auth/signup/', user);
   showSignUpDialog();
   await sleep(3000);
   cleanContactControls();

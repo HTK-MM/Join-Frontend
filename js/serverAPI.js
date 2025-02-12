@@ -21,7 +21,23 @@ async function loadData(path) {
   }
 }
 
-
+async function postSignup(path, data = {}) {
+  try {
+    let response = await fetch(BASE_URL + path, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+    if (!response.ok) {
+      throw new Error(`Fehler beim Speichern: ${response.statusText}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 async function postData(path, data = {}) {
   try {
@@ -42,9 +58,9 @@ async function postData(path, data = {}) {
       alert("Du bist nicht angemeldet");
       return "";
     }
-    
+
     else if (!response.ok) {
-      throw new Error(`Fehler beim Löschen: ${response.statusText}`);
+      throw new Error(`Fehler beim Speichern: ${response.statusText}`);
     }
 
     return await response.json();
